@@ -16,8 +16,14 @@
 			 "Kto rano wstaje temu staje",
 			 "Czy hrabina czy kucharka byle była w kroku szparka",
 			 "Kto rano wstaje temu Pan Bóg daje",
-			 "A co po czyjej wielkości, jak nie ma w głowie mądrości",
-			 "Będą takie mrozy, że przymarznie cap do kozy"
+			 "A co po czyjej wielkości jak nie ma w głowie mądrości",
+			 "Będą takie mrozy że przymarznie cap do kozy",
+             "W maju jak w gaju",
+             "Kto pod kim dołki kopie ten sam w nie wpada",
+             "Jeśli wpadniesz między wrony musisz krakać tak jak one",
+             "Każdy kij ma dwa końce",
+             "Do trzech razy sztuka"
+             
 									];
 var haslo_losowe = Math.floor(Math.random()*hasla.length);
 	if(haslo_losowe > hasla.length-1) haslo_losowe = 1;
