@@ -30,7 +30,7 @@ const check = nr => {
 
         // fail
         fails++;
-        var picture = `img/s${fails}.jpg`;
+        var picture = `img/s${fails}.png`;
         document.getElementById("szubienica").innerHTML = `<img src="${picture}" alt=""/>`;
     }
     // win
