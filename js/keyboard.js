@@ -1,6 +1,6 @@
 const keyboard = (() => {
-    let divContent = "";
     const drawKeys = () => {
+        let divContent = "";
         for (i = 0; i < 35; i++) {
 
             let element = "fig" + i;
