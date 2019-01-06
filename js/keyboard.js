@@ -1,7 +1,8 @@
 const keyboard = (() => {
     const drawKeys = () => {
         let divContent = "";
-        for (i = 0; i < 35; i++) {
+        const alphabet = 35;
+        for (i = 0; i < alphabet; i++) {
 
             let element = "fig" + i;
             divContent = divContent + `<div class="litera" onclick="check('${i}')" id="${element}">${figures[i]} </div>`;
