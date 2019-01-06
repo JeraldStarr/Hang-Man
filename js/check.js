@@ -1,5 +1,7 @@
 const check = nr => {
     let isGuessed = false;
+    const alphabet = new Figures();
+    const figures = alphabet.figures;
     for (i = 0; i < statementLength; i++) {
         if (statement.charAt(i) === figures[nr]) {
             hiddenStatement = hiddenStatement.setFigure(i, figures[nr]);
