@@ -1,0 +1,42 @@
+@startuml
+class Keyboard {
+    + drawKeys()
+    + onClick(figure)
+    - figures
+}
+class Password {
+    + selectPassword()
+    + getSelectedPassword()
+    + drawHiddenPassword()
+    + showFigure(figure)
+    - statements
+    - selectedPassword
+}
+class HangMan {
+    + drawNextImage()
+}
+class Validator {
+    + validatePassword(figure)
+    + subscribe(Action, function(figure))
+}
+class Game {
+    + draw()
+    + endOfGame(result)
+}
+
+enum Action {
+    Ok,
+    Nok,
+    Win,
+    Failed
+}
+
+Keyboard "1" --* "1" Game
+Game "1" *-left- "1" HangMan
+'HangMan "1" --* "1" Game
+Game "1" *-- "1" Password
+Game "1" *-- "1" Validator
+
+
+Keyboard -left-> "1" Validator
+@enduml
