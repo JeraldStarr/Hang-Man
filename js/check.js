@@ -1,10 +1,10 @@
-const check = nr => {
+const check = (nr, letter) => {
+    console.log(nr);
+    console.log(letter);
     let isGuessed = false;
-    const alphabet = new Figures();
-    const figures = alphabet.figures;
     for (i = 0; i < statementLength; i++) {
-        if (statement.charAt(i) === figures[nr]) {
-            hiddenStatement = hiddenStatement.setFigure(i, figures[nr]);
+        if (statement.charAt(i) === letter) {
+            hiddenStatement = hiddenStatement.setFigure(i, letter);
             isGuessed = true;
         }
     }
