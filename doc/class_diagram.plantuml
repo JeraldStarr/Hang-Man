@@ -1,39 +1,38 @@
 @startuml
+
 class Keyboard {
     + drawKeys()
     + onClick(figure)
     - figures
 }
 class Password {
-    + selectPassword()
-    + getSelectedPassword()
+    + selectPassword(): password
     + drawHiddenPassword()
     + showFigure(figure)
+    - win()
     - statements
     - selectedPassword
 }
 class HangMan {
     + drawNextImage()
+    - failed()
 }
 class Validator {
-    + validatePassword(figure)
+    + validatePassword(figure): bool
     + subscribe(Action, function(figure))
 }
 class Game {
-    + draw()
-    + endOfGame(result)
+    - draw()
+    - subscribe()
 }
 
 enum Action {
     Ok,
-    Nok,
-    Win,
-    Failed
+    Nok
 }
 
 Keyboard "1" --* "1" Game
-Game "1" *-left- "1" HangMan
-'HangMan "1" --* "1" Game
+Game "1" *-- "1" HangMan
 Game "1" *-- "1" Password
 Game "1" *-- "1" Validator
 

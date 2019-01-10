@@ -1,0 +1,74 @@
+@startuml
+actor Browser
+participant Game
+participant Password
+participant Validator
+participant Keyboard
+participant HangMan
+
+== Initialization ==
+create Game
+Browser -> Game: create()
+
+create Password
+Game -> Password: create()
+Game -> Password: selectPassword()
+Game <-- Password: password
+
+create Validator
+Game -> Validator: create(password)
+Game <-- Validator
+
+create Keyboard
+Game -> Keyboard: create(validator)
+Game <-- Keyboard
+
+create HangMan
+Game -> HangMan: create()
+
+Game -> Game: subscribe()
+ref over Game, Password,Validator, HangMan : Game::subscribe()
+
+Game -> Game: draw()
+ref over Game, Password, Keyboard, HangMan : Game::draw()
+
+Browser <-- Game
+
+== Game::subscribe() ==
+Game -> Validator: subscribe(Action::Ok, Password::showFigure)
+Game -> Validator: subscribe(Action::Nok, HangMan::drawNextImage)
+Game <-- Validator
+
+== Game::draw() ==
+Game -> Password: drawHiddenPassword()
+Game <-- Password
+Game -> Keyboard: drawKeys()
+Keyboard -> Browser: onClick(Keyboard::onClick(figure))
+Keyboard <-- Browser
+Game <-- Keyboard
+Game -> HangMan: drawNextImage()
+Game <-- HangMan
+
+== Browser::onClick() ==
+Browser -> Keyboard: onClick(figure)
+Keyboard -> Validator: validatePassword(figure)
+alt validation OK
+    Validator -> Password: showFigure(figure)
+    alt password guessed
+        Password -> Browser: show(win)
+    end
+    Validator <-- Password
+    Keyboard <-- Validator: true
+else validation NOK
+    Validator -> HangMan: drawNextImage()
+    alt game lost
+        HangMan -> Browser: show(failed)
+    end
+    Validator <-- HangMan
+    Keyboard <-- Validator: false
+end
+note right Keyboard: result = {true, false}
+Keyboard -> Keyboard: markFigure(figure, result)
+Browser <-- Keyboard
+
+@enduml
