@@ -31,10 +31,10 @@ class Keyboard {
         }
         return alphabetContainer;
     }
-    onClick(figures) {
-        [...figures.childNodes].forEach((figure) => {
-            figure.addEventListener("click", () => {
-                validator.validatePassword(figure.textContent);
+    onClick(alphabetContainer) {
+        [...alphabetContainer.childNodes].forEach((key) => {
+            key.addEventListener("click", () => {
+                validator.validatePassword(key.textContent);
             });
         });
     }
