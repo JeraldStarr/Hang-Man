@@ -24,12 +24,21 @@ class HTML {
     addKeysToView(id, index) {
         alphabet.appendChild(this.createKeyHTML(id, index));
     }
-    addBreakingDivToView() {
+    addCuttingDivToView() {
         alphabet.appendChild(this.createCuttingDiv());
     }
     arrangeKeys(index, id) {
         const figuresInRow = 7;
         this.addKeysToView(id, index);
-        if ((index + 1) % figuresInRow === 0) this.addBreakingDivToView(alphabet);
+        if ((index + 1) % figuresInRow === 0) this.addCuttingDivToView(alphabet);
+    }
+    setID(i) {
+        let elementId = "fig" + i;
+        return elementId;
+    }
+    buildHTML(i) {
+        for (let i = 0; i < keyboard.figures.length; i++) {
+            this.arrangeKeys(i, this.setID(i));
+        }
     }
 }

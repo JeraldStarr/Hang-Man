@@ -5,13 +5,7 @@ class Keyboard {
     drawKeys() {
         const html = new HTML();
         const alphabetContainer = document.querySelector('#alphabet');
-        const buildHTML = () => {
-            for (let i = 0; i < this.figures.length; i++) {
-                let elementId = "fig" + i;
-                html.arrangeKeys(i, elementId);
-            }
-        }
-        buildHTML();
+        html.buildHTML();
         return alphabetContainer;
     }
     onClick(alphabetContainer) {
@@ -22,6 +16,3 @@ class Keyboard {
         });
     }
 }
-
-const keyboard = new Keyboard();
-keyboard.onClick(keyboard.drawKeys());
