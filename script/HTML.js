@@ -1,23 +1,21 @@
 class HTML {
     constructor() {
-        this.createDivHTML = function() {
-            const divHTML = document.createElement("div");
-            return divHTML;
-        }
     }
-    createDivHTML() {
-        const divHTML = document.createElement("div");
-        return divHTML;
+    createHTML(html) {
+        return document.createElement(html);
+    }
+    getHTML(html) {
+        return document.querySelector(html);
     }
     createKeyHTML(id, index) {
-        const divHTML = this.createDivHTML();
+        const divHTML = this.createHTML("div");
         divHTML.classList.add("letter");
         divHTML.id = id;
         divHTML.textContent = keyboard.figures[index];
         return divHTML;
     }
     createCuttingDiv() {
-        const divHTML = this.createDivHTML();
+        const divHTML = this.createHTML("div");
         divHTML.setAttribute("style", "clear: both");
         return divHTML;
     }
@@ -33,8 +31,7 @@ class HTML {
         if ((index + 1) % figuresInRow === 0) this.addCuttingDivToView(alphabet);
     }
     setID(i) {
-        let elementId = "fig" + i;
-        return elementId;
+        return "fig" + i;   
     }
     buildHTML(i) {
         for (let i = 0; i < keyboard.figures.length; i++) {
