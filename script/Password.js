@@ -1,5 +1,6 @@
 class Password {
     constructor() {
+        this.html = new HTML();
         this.statements = [
             "Fortuna kołem się toczy",
             "Bez pracy nie ma kołaczy",
@@ -24,7 +25,7 @@ class Password {
             "Jeśli wpadniesz między wrony musisz krakać tak jak one",
             "Każdy kij ma dwa końce",
             "Do trzech razy sztuka",
-            "A kto z nami nie wypije – tego we dwa kije",
+            "A kto z nami nie wypije tego we dwa kije",
             "Biedny kupuje jedną kapotę, ale na całe życie",
             "Bogatemu to i byk się ocieli",
             "Chcesz się dowiedzieć prawdy o sobie pokłóć się z przyjacielem",
@@ -38,7 +39,8 @@ class Password {
             "Głupiec głupca a diabeł diabła chwali",
             "Hulaj dusza piekła nie ma",
             "I ja waść i ty waść a kto będzie świnie paść",
-            "Idzie luty podkuj buty"
+            "Idzie luty podkuj buty",
+            "Jak Kuba Bogu tak Bóg Kubie"
         ],
         this.selectedPassword;
         this.hiddenPassword = "";
@@ -62,6 +64,13 @@ class Password {
             if (this.selectedPassword.charAt(i) === figure) {
                this.hiddenPassword = this.setFigure(i, figure, hiddenPassword);
             }
+            console.log(this.hiddenPassword);
+        }
+    }
+    win() {
+        const alphabethHTML = this.html.getHTML("#alphabet");
+        if (this.selectedPassword === this.hiddenPassword) {
+            alphabethHTML.innerHTML = `Tak jest! Podano prawidłowe hasło: ${this.selectedPassword} <br/><br/><span class="reset" onclick="location.reload()">JESZCZE RAZ?</span>`;
         }
     }
 }
