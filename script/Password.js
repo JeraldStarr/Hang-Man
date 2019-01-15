@@ -46,25 +46,29 @@ class Password {
         this.hiddenPassword = "";
     }
     selectPassword() {
-       this.selectedPassword = this.statements[Math.floor(Math.random() * this.statements.length)];
+       this.selectedPassword = this.statements[Math.floor(Math.random() * this.statements.length)].toUpperCase();
        if (this.selectedPassword > this.statements.length - 1) this.selectedPassword = 1;
     }
     drawHiddenPassword() {
         for (let i = 0; i < this.selectedPassword.length; i++) {
             this.hiddenPassword = this.selectedPassword.charAt(i) === " " ? this.hiddenPassword += " " : this.hiddenPassword += "-";
         }
+
     }
     setFigure(place, sign, hiddenPassword) {
-            if (place > hiddenPassword.length - 1) return hiddenPassword.toString();
+            if (place > hiddenPassword.length - 1) {
+                return hiddenPassword.toString();
+            }
             else return `${hiddenPassword.substr(0, place)}${sign}${hiddenPassword.substr(place + 1)}`;
+            
     }
     showFigure(figure) {
+        figure = figure.toUpperCase();
         for (let i = 0; i < this.selectedPassword.length; i++) {
             let hiddenPassword = this.hiddenPassword;
             if (this.selectedPassword.charAt(i) === figure) {
                this.hiddenPassword = this.setFigure(i, figure, hiddenPassword);
             }
-            console.log(this.hiddenPassword);
         }
     }
     win() {
