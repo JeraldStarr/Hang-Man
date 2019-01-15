@@ -56,9 +56,7 @@ class Password {
 
     }
     setFigure(place, sign, hiddenPassword) {
-            if (place > hiddenPassword.length - 1) {
-                return hiddenPassword.toString();
-            }
+            if (place > hiddenPassword.length - 1) return hiddenPassword.toString();
             else return `${hiddenPassword.substr(0, place)}${sign}${hiddenPassword.substr(place + 1)}`;
             
     }
@@ -72,9 +70,10 @@ class Password {
         }
     }
     win() {
-        const alphabethHTML = this.html.getHTML("#alphabet");
+        this.selectedPassword = "aa";
+        this.hiddenPassword = "aa";
         if (this.selectedPassword === this.hiddenPassword) {
-            alphabethHTML.innerHTML = `Tak jest! Podano prawidłowe hasło: ${this.selectedPassword} <br/><br/><span class="reset" onclick="location.reload()">JESZCZE RAZ?</span>`;
+            this.html.alphabetHTML.innerHTML = `Tak jest! Podano prawidłowe hasło: ${this.selectedPassword} <br/><br/><span class="reset" onclick="location.reload()">JESZCZE RAZ?</span>`;
         }
     }
 }

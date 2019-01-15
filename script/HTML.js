@@ -1,5 +1,8 @@
 class HTML {
     constructor() {
+        this.alphabetHTML = this.getHTML("#alphabet");
+        this.boardHTML = this.getHTML("#board");
+        this.hangmanImage = this.getHTML("#szubienica");
     }
     createHTML(html) {
         return document.createElement(html);
