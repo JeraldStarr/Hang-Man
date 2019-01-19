@@ -10,14 +10,19 @@ class Keyboard {
     drawKeys() {
         const html = new HTML();
         const alphabetContainer = html.getHTML('#alphabet');
-        html.buildHTML();
+        html.buildKeys(this);
         return alphabetContainer;
     }
     onClick(alphabetContainer) {
         [...alphabetContainer.childNodes].forEach((key) => {
-            key.addEventListener("click", () => {
-                validator.validatePassword(key.textContent);
-            });
+            if (key.id) {
+                key.addEventListener("click", () => {
+                    // validator.validatePassword(key.textContent);
+                });
+            }
         });
     }
 }
+
+const keyboard = new Keyboard();
+// keyboard.onClick(keyboard.drawKeys());
