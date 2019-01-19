@@ -1,29 +1,29 @@
 class HTML {
     constructor() {
-        this.alphabetHTML = this.getHTML("#alphabet");
-        this.boardHTML = this.getHTML("#board");
-        this.hangmanImage = this.getHTML("#szubienica");
+        this.alphabetHTML = this.get("#alphabet");
+        this.boardHTML = this.get("#board");
+        this.hangmanImage = this.get("#szubienica");
+        this.keyboard;
     }
-    createHTML(html) {
-        return document.createElement(html);
+    get(element) {
+        return document.querySelector(element);
     }
-    getHTML(html) {
-        return document.querySelector(html);
-    }
-    createKeyHTML(id, index) {
-        const divHTML = this.createHTML("div");
+    createKey(id, index) {
+        const divHTML = document.createElement("div");
+        let figures = null;
         divHTML.classList.add("letter");
         divHTML.id = id;
-        divHTML.textContent = keyboard.figures[index];
+        figures = game.keyboard.getFigures();
+        divHTML.textContent = figures[index];
         return divHTML;
     }
     createCuttingDiv() {
-        const divHTML = this.createHTML("div");
+        const divHTML = document.createElement("div");
         divHTML.setAttribute("style", "clear: both");
         return divHTML;
     }
     addKeysToView(id, index) {
-        alphabet.appendChild(this.createKeyHTML(id, index));
+        alphabet.appendChild(this.createKey(id, index));
     }
     addCuttingDivToView() {
         alphabet.appendChild(this.createCuttingDiv());
@@ -36,8 +36,9 @@ class HTML {
     setID(i) {
         return "fig" + i;   
     }
-    buildHTML(i) {
-        for (let i = 0; i < keyboard.figures.length; i++) {
+    buildKeys() {
+        const alphabetLenght = game.keyboard.getFigures().length;
+        for (let i = 0; i < alphabetLenght; i++) {
             this.arrangeKeys(i, this.setID(i));
         }
     }
