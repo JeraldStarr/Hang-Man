@@ -1,6 +1,6 @@
 class Password {
     constructor() {
-        this.html = new HTML();
+        this.key = new Key();
         this.statements = [
             "Fortuna kołem się toczy",
             "Bez pracy nie ma kołaczy",
@@ -42,44 +42,38 @@ class Password {
             "Idzie luty podkuj buty",
             "Jak Kuba Bogu tak Bóg Kubie"
         ],
-        this.selectedPassword;
+        this.selectedPassword = "";
         this.hiddenPassword = "";
     }
     selectPassword() {
        this.selectedPassword = this.statements[Math.floor(Math.random() * 
         this.statements.length)].toUpperCase();
-       if (this.selectedPassword > this.statements.length - 1) this.selectedPassword = 1;
-       console.log(this.selectedPassword);
     }
     drawHiddenPassword() {
         for (let i = 0; i < this.selectedPassword.length; i++) {
-            this.hiddenPassword = this.selectedPassword.replace(/[a-ząćęłńóśźż]/gi, "-")
+            this.hiddenPassword = this.selectedPassword.
+            replace(/[a-ząćęłńóśźż]/gi, "-")
         }
-        console.log(this.hiddenPassword);
     }
-    setFigure(place, sign, hiddenPassword) {
-            if (place > hiddenPassword.length - 1) return hiddenPassword.toString();
-            else return `${hiddenPassword.substr(0, place)}${sign}${hiddenPassword.
-                substr(place + 1)}`;
+    setFigure(place, sign) {
+            this.hiddenPassword = `${this.hiddenPassword.substr(0, place)}
+            ${sign}${this.hiddenPassword.substr(place + 1)}`;
             
     }
     showFigure(figure) {
         figure = figure.toUpperCase();
         for (let i = 0; i < this.selectedPassword.length; i++) {
-            let hiddenPassword = this.hiddenPassword;
             if (this.selectedPassword.charAt(i) === figure) {
-               this.hiddenPassword = this.setFigure(i, figure, hiddenPassword);
+            this.setFigure(i, figure);
             }
         }
-        console.log(this.hiddenPassword);
     }
     win() {
         if (this.selectedPassword === this.hiddenPassword) {
-            this.html.alphabetHTML.innerHTML = `Tak jest! Podano prawidłowe hasło: 
+            this.key.alphabetHTML.innerHTML = `Tak jest! Podano prawidłowe hasło: 
             ${this.selectedPassword} <br/><br/><span class="reset" 
             onclick="location.reload()">JESZCZE RAZ?</span>`;
         }
-        console.log("won");
     }
 }
 
