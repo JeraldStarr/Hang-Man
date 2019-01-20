@@ -1,5 +1,7 @@
 class Keyboard {
     constructor() {
+        this.key = new Key();
+        this.alphabetContainer = document.querySelector('#alphabet');
     }
     getFigures() {
         const figures = ["A", "Ą", "B", "C", "Ć", "D",
@@ -10,14 +12,16 @@ class Keyboard {
                          "X", "Y", "Z", "Ż", "Ź"];
         return figures;
     }
-    drawKeys() {
-        const html = new HTML();
-        const alphabetContainer = html.get('#alphabet');
-        html.buildKeys();
-        return alphabetContainer;
+    arrangeKeys(index, id) {
+        const figuresInRow = 7;
+        this.key.addKeysToView(id, index, this.alphabetContainer);
+        if ((index + 1) % figuresInRow === 0) this.key.addCuttingDivToView(this.alphabetContainer);
     }
-    onClick(alphabetContainer) {
-        [...alphabetContainer.childNodes].forEach((key) => {
+    drawKeys() {
+        this.key.buildKeys(this);
+    }
+    onClick() {
+        [...this.alphabetContainer.childNodes].forEach((key) => {
             if (key.id) {
                 key.addEventListener("click", () => {
                     // validator.validatePassword(key.textContent);
