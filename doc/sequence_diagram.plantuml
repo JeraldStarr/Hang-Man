@@ -4,6 +4,8 @@ participant Game
 participant Password
 participant Validator
 participant Keyboard
+participant Key
+participant Cutting
 participant HangMan
 
 == Initialization ==
@@ -21,6 +23,24 @@ Game <-- Validator
 
 create Keyboard
 Game -> Keyboard: create(validator)
+loop for each figure in figures
+    create Key
+    Keyboard -> Key: create(figure, alphabet)
+    Keyboard <-- Key
+    alt "(index + 1) % 7 == 0"
+        create Cutting
+        Keyboard -> Cutting: create(alphabet)
+        Keyboard <-- Cutting
+    end
+end
+Keyboard -> Keyboard: setOnClickHandler(handler)
+loop for each key in drawKeys
+    Keyboard -> Key: setOnClickHandler(handler)
+    Key -> Browser: onClink(Key::onClick)
+    Key <-- Browser
+    Keyboard <-- Key
+end
+
 Game <-- Keyboard
 
 create HangMan
@@ -50,25 +70,25 @@ Game -> HangMan: drawNextImage()
 Game <-- HangMan
 
 == Browser::onClick() ==
-Browser -> Keyboard: onClick(figure)
-Keyboard -> Validator: validatePassword(figure)
+Browser -> Key: onClick()
+Key->Validator: validateFigure(figure)
 alt validation OK
     Validator -> Password: showFigure(figure)
     alt password guessed
         Password -> Browser: show(win)
     end
     Validator <-- Password
-    Keyboard <-- Validator: true
+    Key <-- Validator: true
 else validation NOK
     Validator -> HangMan: drawNextImage()
     alt game lost
         HangMan -> Browser: show(failed)
     end
     Validator <-- HangMan
-    Keyboard <-- Validator: false
+    Key <-- Validator: false
 end
-note right Keyboard: result = {true, false}
-Keyboard -> Keyboard: markFigure(figure, result)
-Browser <-- Keyboard
+note right Key: result = {true, false}
+Key -> Key: markFigure(figure, result)
+Browser <-- Key
 
 @enduml

@@ -1,37 +1,60 @@
 @startuml
 
 class Keyboard {
+    + Keyboard()
     + drawKeys()
-    + onClick(figure)
-    - figures
+    __ private __
+    - createKeys()
+    - setOnClickHandler(handler)
+    - figures: char[]
+}
+
+class Key {
+    + Key(figure: char, alphabet: HtmlElement)
+    + setOnClickHandler(handler)
+    __ private __
+    -markFigure(result: bool)
+    - onClick()
+    -figure: char
+    -div: HtmlElement
+}
+class Cutting {
+    Cutting(alphabet)
 }
 class Password {
-    + selectPassword(): password
+    + Password()
+    + selectPassword(): string
     + drawHiddenPassword()
-    + showFigure(figure)
+    + showFigure(figure: Char)
+    __ private __
     - win()
-    - statements
-    - selectedPassword
+    - statements: string
+    - selectedPassword: string[]
 }
 class HangMan {
+    + HangMan()
     + drawNextImage()
+    __ private __
     - failed()
 }
 class Validator {
-    + validatePassword(figure): bool
+    + Validator(password: String)
+    + validateFigure(figure: char): bool
     + subscribe(Action, function(figure))
 }
 class Game {
+    __ private __
     - draw()
     - subscribe()
 }
-
 enum Action {
     Ok,
     Nok
 }
 
 Keyboard "1" --* "1" Game
+Keyboard "1" *-- "many" Key
+Keyboard "1" *-- "many" Cutting
 Game "1" *-- "1" HangMan
 Game "1" *-- "1" Password
 Game "1" *-- "1" Validator
