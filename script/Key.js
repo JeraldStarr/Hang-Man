@@ -1,36 +1,36 @@
 class Key {
-    constructor() {
-        this.alphabetHTML = document.querySelector("#alphabet");
-        this.boardHTML = document.querySelector("#board");
-        this.hangmanImage = document.querySelector("#szubienica");
+    constructor(parentElement, figure) {
+        this.parentElement = parentElement;
+        this.figure = figure;
+        this.div = this.createDiv();
+        this.addDivToParentElement();
     }
-    createKey(id, index) {
-        const divHTML = document.createElement("div");
-        let figures = null;
-        divHTML.classList.add("letter");
-        divHTML.id = id;
-        figures = game.keyboard.getFigures();
-        divHTML.textContent = figures[index];
-        return divHTML;
+    addClass(cssClass) {
+        this.div.classList.add(cssClass);
     }
-    createCuttingDiv() {
-        const divHTML = document.createElement("div");
-        divHTML.setAttribute("style", "clear: both");
-        return divHTML;
-    }
-    addKeysToView(id, index, alphabetContainer) {
-        alphabetContainer.appendChild(this.createKey(id, index));
-    }
-    addCuttingDivToView(alphabetContainer) {
-        alphabetContainer.appendChild(this.createCuttingDiv());
-    }
-    setID(i) {
-        return "fig" + i;   
-    }
-    buildKeys(keyboard) {
-        const alphabetLenght = game.keyboard.getFigures().length;
-        for (let i = 0; i < alphabetLenght; i++) {
-            keyboard.arrangeKeys(i, this.setID(i));
+    setOnClickHandler(handler) {
+        const self = this;
+        const markKey = () => {
+            if (handler(self.figure)) {
+                this.addClass("guessed");
+            } else {
+                this.addClass("notGuessed");
+            }
+            self.div.removeEventListener("click", markKey);
         }
+        this.div.addEventListener("click", markKey);
+    }
+    createDiv() {
+        const divHTML = document.createElement("div");
+        divHTML.classList.add("letter");
+        divHTML.id = this.getId()
+        divHTML.textContent = this.figure
+        return divHTML;
+    }
+    addDivToParentElement() {
+        this.parentElement.appendChild(this.div);
+    }
+    getId() {
+        return 'fig' + this.figure;
     }
 }
