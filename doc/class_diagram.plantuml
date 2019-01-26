@@ -1,7 +1,7 @@
 @startuml
 
 class Keyboard {
-    + Keyboard()
+    + Keyboard(validator)
     + drawKeys()
     __ private __
     - createKeys()
