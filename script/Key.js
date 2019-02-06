@@ -4,6 +4,7 @@ class Key {
         this.figure = figure;
         this.div = this.createDiv();
         this.addDivToParentElement();
+
     }
     addClass(cssClass) {
         this.div.classList.add(cssClass);
@@ -21,14 +22,17 @@ class Key {
         this.div.addEventListener("click", markKey);
     }
     createDiv() {
-        const divHTML = document.createElement("div");
-        divHTML.classList.add("letter");
-        divHTML.id = this.getId()
-        divHTML.textContent = this.figure
-        return divHTML;
-    }
+            const divHTML = document.createElement("div");
+            divHTML.classList.add("letter");
+            divHTML.id = this.getId()
+            divHTML.textContent = this.figure
+            return divHTML;
+        }
     addDivToParentElement() {
-        this.parentElement.appendChild(this.div);
+        if (this.figure) {
+            this.parentElement.appendChild(this.div);
+        }
+    
     }
     getId() {
         return 'fig' + this.figure;
