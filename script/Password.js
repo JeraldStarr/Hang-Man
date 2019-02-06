@@ -1,6 +1,5 @@
 class Password {
     constructor() {
-        this.key = new Key();
         this.statements = [
             "Fortuna kołem się toczy",
             "Bez pracy nie ma kołaczy",
@@ -26,7 +25,7 @@ class Password {
             "Każdy kij ma dwa końce",
             "Do trzech razy sztuka",
             "A kto z nami nie wypije tego we dwa kije",
-            "Biedny kupuje jedną kapotę, ale na całe życie",
+            "Biedny kupuje jedną kapotę ale na całe życie",
             "Bogatemu to i byk się ocieli",
             "Chcesz się dowiedzieć prawdy o sobie pokłóć się z przyjacielem",
             "Chrzest polewaj wodą wesele wódką a pogrzeb płakaniem",
@@ -41,39 +40,47 @@ class Password {
             "I ja waść i ty waść a kto będzie świnie paść",
             "Idzie luty podkuj buty",
             "Jak Kuba Bogu tak Bóg Kubie"
-        ],
-        this.selectedPassword = "";
+        ];
+        this._selectedPassword = "";
         this.hiddenPassword = "";
     }
     selectPassword() {
-       this.selectedPassword = this.statements[Math.floor(Math.random() * 
+
+        this._selectedPassword = this.statements[Math.floor(Math.random() * 
         this.statements.length)].toUpperCase();
+        return this._selectedPassword;
     }
     drawHiddenPassword() {
-        for (let i = 0; i < this.selectedPassword.length; i++) {
-            this.hiddenPassword = this.selectedPassword.
+            this.hiddenPassword = this._selectedPassword.
             replace(/[a-ząćęłńóśźż]/gi, "-")
-        }
     }
     setFigure(place, sign) {
-            this.hiddenPassword = `${this.hiddenPassword.substr(0, place)}
-            ${sign}${this.hiddenPassword.substr(place + 1)}`;
+            this.hiddenPassword = `${this.hiddenPassword.substr(0, place)}${sign}${this.hiddenPassword.substr(place + 1)}`;
             
     }
     showFigure(figure) {
         figure = figure.toUpperCase();
-        for (let i = 0; i < this.selectedPassword.length; i++) {
-            if (this.selectedPassword.charAt(i) === figure) {
+        for (let i = 0; i < this._selectedPassword.length; i++) {
+            if (this._selectedPassword.charAt(i) === figure) {
             this.setFigure(i, figure);
             }
         }
     }
-    win() {
-        if (this.selectedPassword === this.hiddenPassword) {
-            this.key.alphabetHTML.innerHTML = `Tak jest! Podano prawidłowe hasło: 
-            ${this.selectedPassword} <br/><br/><span class="reset" 
+    displayVictoryMessage() {
+        const keys = new Key(document.querySelector('#alphabet'));
+        if (this._selectedPassword === this.hiddenPassword) {
+            keys.parentElement.innerHTML = `Tak jest! Podano prawidłowe hasło: 
+            ${game.password._selectedPassword} <br/><br/><span class="reset" 
+            onclick="location.reload()">JESZCZE RAZ?</span>`;
+        }
+    }
+    displayLossMessage(fails) {
+        const keys = new Key(document.querySelector('#alphabet'));
+        const NUMBER_OF_FAILS = 9;
+        if (fails >= NUMBER_OF_FAILS) {
+            keys.parentElement.innerHTML = `Przegrana! Prawidłowe hasło: 
+            ${game.password._selectedPassword} <br/><br/><span class="reset" 
             onclick="location.reload()">JESZCZE RAZ?</span>`;
         }
     }
 }
-
