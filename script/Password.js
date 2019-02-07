@@ -47,8 +47,12 @@ class Password {
         this.hiddenPassword = "";
     }
     selectPassword() {
+<<<<<<< HEAD
         this._selectedPassword = this.statements
         [Math.floor(Math.random() * this.statements.length)].toUpperCase();
+=======
+        this._selectedPassword = this.statements[Math.floor(Math.random() * this.statements.length)].toUpperCase();
+>>>>>>> password
         return this._selectedPassword;
     }
     drawHiddenPassword() {
