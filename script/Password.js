@@ -47,12 +47,7 @@ class Password {
         this.hiddenPassword = "";
     }
     selectPassword() {
-<<<<<<< HEAD
-        this._selectedPassword = this.statements
-        [Math.floor(Math.random() * this.statements.length)].toUpperCase();
-=======
         this._selectedPassword = this.statements[Math.floor(Math.random() * this.statements.length)].toUpperCase();
->>>>>>> password
         return this._selectedPassword;
     }
     drawHiddenPassword() {
@@ -79,10 +74,8 @@ class Password {
     }
     displayVictoryMessage() {
         const alphabetContainer = document.querySelector('#alphabet');
-        if (this._selectedPassword === this.hiddenPassword) {
             alphabetContainer.innerHTML = `Tak jest! Podano prawidłowe hasło: 
             ${this._selectedPassword} <br/><br/><span class="reset" 
             onclick="location.reload()">JESZCZE RAZ?</span>`;
-        }
     }
 }
