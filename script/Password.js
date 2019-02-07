@@ -1,3 +1,5 @@
+
+
 class Password {
     constructor() {
         this.statements = [
@@ -45,42 +47,35 @@ class Password {
         this.hiddenPassword = "";
     }
     selectPassword() {
-
-        this._selectedPassword = this.statements[Math.floor(Math.random() * 
-        this.statements.length)].toUpperCase();
+        this._selectedPassword = this.statements[Math.floor(Math.random() * this.statements.length)].toUpperCase();
         return this._selectedPassword;
     }
     drawHiddenPassword() {
-            this.hiddenPassword = this._selectedPassword.
-            replace(/[a-ząćęłńóśźż]/gi, "-")
+            this.hiddenPassword = this._selectedPassword.replace(/[a-ząćęłńóśźż]/gi, "-");
     }
     setFigure(place, sign) {
-            this.hiddenPassword = `${this.hiddenPassword.substr(0, place)}${sign}${this.hiddenPassword.substr(place + 1)}`;
+            this.hiddenPassword = 
+            `${this.hiddenPassword.substr(0, place)}${sign}${this.hiddenPassword.substr(place + 1)}`;
             
+    }
+    isPasswordGuessed() {
+        return this._selectedPassword === this.hiddenPassword
     }
     showFigure(figure) {
         figure = figure.toUpperCase();
         for (let i = 0; i < this._selectedPassword.length; i++) {
             if (this._selectedPassword.charAt(i) === figure) {
-            this.setFigure(i, figure);
+                this.setFigure(i, figure);
             }
+        }
+        if(this.isPasswordGuessed()) {
+            this.displayVictoryMessage();
         }
     }
     displayVictoryMessage() {
-        const keys = new Key(document.querySelector('#alphabet'));
-        if (this._selectedPassword === this.hiddenPassword) {
-            keys.parentElement.innerHTML = `Tak jest! Podano prawidłowe hasło: 
-            ${game.password._selectedPassword} <br/><br/><span class="reset" 
+        const alphabetContainer = document.querySelector('#alphabet');
+            alphabetContainer.innerHTML = `Tak jest! Podano prawidłowe hasło: 
+            ${this._selectedPassword} <br/><br/><span class="reset" 
             onclick="location.reload()">JESZCZE RAZ?</span>`;
-        }
-    }
-    displayLossMessage(fails) {
-        const keys = new Key(document.querySelector('#alphabet'));
-        const NUMBER_OF_FAILS = 9;
-        if (fails >= NUMBER_OF_FAILS) {
-            keys.parentElement.innerHTML = `Przegrana! Prawidłowe hasło: 
-            ${game.password._selectedPassword} <br/><br/><span class="reset" 
-            onclick="location.reload()">JESZCZE RAZ?</span>`;
-        }
     }
 }
