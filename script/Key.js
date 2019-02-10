@@ -4,7 +4,6 @@ class Key {
         this.figure = figure;
         this.div = this.createDiv();
         this.addDivToParentElement();
-
     }
     addClass(cssClass) {
         this.div.classList.add(cssClass);
@@ -29,10 +28,7 @@ class Key {
             return divHTML;
         }
     addDivToParentElement() {
-        if (this.figure) {
             this.parentElement.appendChild(this.div);
-        }
-    
     }
     getId() {
         return 'fig' + this.figure;
