@@ -4,7 +4,10 @@ class Key {
         this.figure = figure;
         this.div = this.createDiv();
         this.addDivToParentElement();
+<<<<<<< HEAD
 
+=======
+>>>>>>> key_feature
     }
     addClass(cssClass) {
         this.div.classList.add(cssClass);
@@ -29,10 +32,12 @@ class Key {
             return divHTML;
         }
     addDivToParentElement() {
-        if (this.figure) {
             this.parentElement.appendChild(this.div);
+<<<<<<< HEAD
         }
     
+=======
+>>>>>>> key_feature
     }
     getId() {
         return 'fig' + this.figure;
