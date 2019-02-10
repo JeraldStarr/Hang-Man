@@ -1,32 +1,35 @@
 class Keyboard {
-    constructor() {
-        this.key = new Key();
-        this.alphabetContainer = document.querySelector('#alphabet');
-    }
-    getFigures() {
-        const figures = ["A", "Ą", "B", "C", "Ć", "D",
-                         "E", "Ę", "F", "G", "H", "I",
-                         "J", "K", "L", "Ł", "M", "N",
-                         "Ń", "O", "Ó", "P", "Q", "R",
-                         "S", "Ś", "T", "U", "V", "W",
-                         "X", "Y", "Z", "Ż", "Ź"];
-        return figures;
-    }
-    arrangeKeys(index, id) {
-        const figuresInRow = 7;
-        this.key.addKeysToView(id, index, this.alphabetContainer);
-        if ((index + 1) % figuresInRow === 0) this.key.addCuttingDivToView(this.alphabetContainer);
+    constructor(validator) {
+        this.alphabetContainer = this.createAlphabetContainer();
+        this.keys = [];
+        this.figures = ["A", "Ą", "B", "C", "Ć", "D",
+                        "E", "Ę", "F", "G", "H", "I",
+                        "J", "K", "L", "Ł", "M", "N",
+                        "Ń", "O", "Ó", "P", "Q", "R",
+                        "S", "Ś", "T", "U", "V", "W",
+                        "X", "Y", "Z", "Ż", "Ź"];
+        this.createKeys();
+        this.setOnClickHandler(validator.validateFigure);
     }
     drawKeys() {
-        this.key.buildKeys(this);
+        let htmlAlphabet = document.querySelector('#alphabet');
+        htmlAlphabet.parentNode.replaceChild(this.alphabetContainer, htmlAlphabet)
     }
-    onClick() {
-        [...this.alphabetContainer.childNodes].forEach((key) => {
-            if (key.id) {
-                key.addEventListener("click", () => {
-                    // validator.validatePassword(key.textContent);
-                });
-            }
+    createAlphabetContainer() {
+        let alphabetContainer = document.createElement("div");
+        alphabetContainer.id = "alphabet";
+        return alphabetContainer;
+    }
+    createKeys() {
+        for (let i = 0; i < this.figures.length; i++) {
+            const FIGURES_IN_ROW = 7;
+            this.keys.push(new Key(this.alphabetContainer, this.figures[i]));
+            if ((i + 1) % FIGURES_IN_ROW === 0) new Cutting(this.alphabetContainer);
+        }
+    }
+    setOnClickHandler(handler) {
+        this.keys.forEach((key) => {
+            key.setOnClickHandler(handler)
         });
     }
 }
