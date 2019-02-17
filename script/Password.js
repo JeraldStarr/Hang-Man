@@ -1,5 +1,3 @@
-
-
 class Password {
     constructor() {
         this.statements = [
@@ -45,6 +43,7 @@ class Password {
         ];
         this._selectedPassword = "";
         this.hiddenPassword = "";
+        this.boardHtml = document.querySelector('#board');
     }
     selectPassword() {
         this._selectedPassword = this.statements[Math.floor(Math.random() * this.statements.length)].toUpperCase();
@@ -52,6 +51,7 @@ class Password {
     }
     drawHiddenPassword() {
             this.hiddenPassword = this._selectedPassword.replace(/[a-ząćęłńóśźż]/gi, "-");
+            this.showHtml();
     }
     setFigure(place, sign) {
             this.hiddenPassword = 
@@ -68,6 +68,7 @@ class Password {
                 this.setFigure(i, figure);
             }
         }
+        this.showHtml();
         if(this.isPasswordGuessed()) {
             this.displayVictoryMessage();
         }
@@ -77,5 +78,11 @@ class Password {
             alphabetContainer.innerHTML = `Tak jest! Podano prawidłowe hasło: 
             ${this._selectedPassword} <br/><br/><span class="reset" 
             onclick="location.reload()">JESZCZE RAZ?</span>`;
+<<<<<<< HEAD
+=======
+    }
+    showHtml() {
+        this.boardHtml.innerHTML = this.hiddenPassword;
+>>>>>>> password
     }
 }
