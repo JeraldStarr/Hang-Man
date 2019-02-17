@@ -78,11 +78,8 @@ class Password {
             alphabetContainer.innerHTML = `Tak jest! Podano prawidłowe hasło: 
             ${this._selectedPassword} <br/><br/><span class="reset" 
             onclick="location.reload()">JESZCZE RAZ?</span>`;
-<<<<<<< HEAD
-=======
     }
     showHtml() {
         this.boardHtml.innerHTML = this.hiddenPassword;
->>>>>>> password
     }
 }

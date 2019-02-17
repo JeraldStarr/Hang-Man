@@ -1,25 +1,33 @@
 class Validator {
     constructor (pass) {
+        this.okSubscriptions = [];
+        this.nokSubscriptions = [];
         this.pass = pass;
-        this.boardHTML = document.querySelector("#board");
-        this.hangMan = new HangMan();
         this.validateFigure = figure => {
-            const password = new Password();
-            this.figure = figure;
             if (this.pass.includes(figure)) {
-                game.password.showFigure(this.figure);
-                this.boardHTML.textContent = game.password.hiddenPassword;
-                if (this.pass === game.password.hiddenPassword) {
-                    password.displayVictoryMessage();
-                }
+                this.notifyOkSubscribers(figure);
                 return true;
             } else {
-                this.hangMan.failed();
-                this.boardHTML.textContent = game.password.hiddenPassword;
+                this.notifyNokSubscribers();
                 return false;
             }
         }
     }
-    subscribe(Action) {
+    subscribe(action, handler) {
+        if (action === Action.OK) {
+            this.okSubscriptions.push(handler);
+        } else if (action === Action.NOK) {
+            this.nokSubscriptions.push(handler);
+        }
+    }
+    notifyOkSubscribers(figure) {
+        for (let i = 0; i < this.okSubscriptions.length; i++) {
+            this.okSubscriptions[i](figure);
+        }
+    }
+    notifyNokSubscribers() {
+        for (let i = 0; i < this.nokSubscriptions.length; i++) {
+            this.nokSubscriptions[i]();
+        }
     }
 }
