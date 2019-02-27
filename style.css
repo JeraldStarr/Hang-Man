@@ -22,7 +22,7 @@ body {
 	min-height: 60px;
 }
 
-#szubienica {
+#gibbet {
 	float: left;
 	width: 450px;
 	text-align: center;
@@ -36,7 +36,7 @@ body {
 	min-height: 280px;
 }
 
-.litera {
+.letter {
 	width: 30px;
 	height: 30px;
 	text-align: center;
@@ -48,7 +48,7 @@ body {
 
 }
 
-.litera:hover {
+.letter:hover {
 	background-color: #222222;
 	color: white;
 	border: 3px solid white;
