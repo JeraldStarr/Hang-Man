@@ -17,6 +17,8 @@ section {
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
+	background: url("img/night1.png") no-repeat;
+	background-position: right 10%;
 }
 
 #board {
@@ -129,6 +131,7 @@ section {
 @media screen and (max-width: 512px) {
 	section {
 		flex-direction: column;
+		background-position: -132px -104px;
 	}
 	#keyboard {
 		width: 100%;
