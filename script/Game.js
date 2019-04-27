@@ -11,6 +11,8 @@ class Game {
         this.selectedPassword = this.password.selectPassword();
         this.validator = new Validator(this.selectedPassword);
         this.keyboard = new Keyboard(this.validator);
+        this.ok = new Audio("audio/ok.wav");
+        this.nok = new Audio("audio/nok.wav");
         this.subscribe();
         this.draw();
     }
@@ -20,9 +22,19 @@ class Game {
         this.hangMan.drawNextImage();
     }
     subscribe() {
-        let self = this;
-        this.validator.subscribe(Action.OK, figure => {self.password.showFigure(figure);});
-        this.validator.subscribe(Action.NOK, () => {self.hangMan.drawNextImage();});
+        const self = this;
+        this.validator.subscribe(Action.OK, figure => {
+            self.password.showFigure(figure);             
+        });
+        this.validator.subscribe(Action.OK, () => {          
+            self.ok.play();
+        });
+        this.validator.subscribe(Action.NOK, () => {
+            self.hangMan.drawNextImage();
+        });
+        this.validator.subscribe(Action.NOK, () => {
+            self.nok.play();
+        });
     }
 }
 
