@@ -1,6 +1,6 @@
 class HangMan {
     constructor(showFailedMessage) {
-        this._fails = 0;
+        this._fails = -1;
         this._hangManImage = document.querySelector("#gibbet img");
         this._showFailedMessage = showFailedMessage;
         this._failed = () => {
