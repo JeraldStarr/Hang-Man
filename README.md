@@ -22,4 +22,4 @@ https://jeraldstarr.github.io/Hang-Man/
 
 # Authors  
 Slawomir Nowicki (Architecture, JavaScript)  
-Lukasz Sitnik (JavaScript, CSS, HTML, graphic)
+Lukasz Sitnik (JavaScript, CSS, HTML, graphics)
