@@ -16,6 +16,9 @@ Mozilla Firefox - version 66.0.3 and higher
 # Architecture
 ![Application's logo](doc/docImg/class_diagram.png)
 
+# Use the app
+https://jeraldstarr.github.io/Hang-Man/
+
 # Authors  
 Slawomir Nowicki (Architecture, JavaScript)  
 Lukasz Sitnik (JavaScript, CSS, HTML)
