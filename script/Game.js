@@ -31,8 +31,6 @@ class Game {
         });
         this.validator.subscribe(Action.NOK, () => {
             self.hangMan.drawNextImage();
-        });
-        this.validator.subscribe(Action.NOK, () => {
             self.nok.play();
         });
     }
