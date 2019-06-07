@@ -22,16 +22,15 @@ class Game {
         this.hangMan.drawNextImage();
     }
     subscribe() {
-        const self = this;
         this.validator.subscribe(Action.OK, figure => {
-            self.password.showFigure(figure);             
+            this.password.showFigure(figure);          
         });
         this.validator.subscribe(Action.OK, () => {          
-            self.ok.play();
+            this.ok.play();
         });
         this.validator.subscribe(Action.NOK, () => {
-            self.hangMan.drawNextImage();
-            self.nok.play();
+            this.hangMan.drawNextImage();
+            this.nok.play();
         });
     }
 }
