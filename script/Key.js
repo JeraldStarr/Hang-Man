@@ -9,14 +9,13 @@ class Key {
         this.div.classList.add(cssClass);
     }
     setOnClickHandler(handler) {
-        const self = this;
         const markKey = () => {
-            if (handler(self.figure)) {
+            if (handler(this.figure)) {
                 this.addClass("guessed");
             } else {
                 this.addClass("notGuessed");
             }
-            self.div.removeEventListener("click", markKey);
+            this.div.removeEventListener("click", markKey);
         }
         this.div.addEventListener("click", markKey);
     }
