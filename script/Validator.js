@@ -4,14 +4,27 @@ class Validator {
         this.nokSubscriptions = [];
         this.pass = pass;
         this.validateFigure = figure => {
-            if (this.pass.includes(figure)) {
-                this.notifyOkSubscribers(figure);
-                return true;
-            } else {
-                this.notifyNokSubscribers();
-                return false;
+            if (this.isFigureValidLetter(figure)) {
+                if (this.isAltPressed(figure)) return true; 
+                else if (this.pass.includes(figure)) {
+                    this.notifyOkSubscribers(figure);
+                    return true;
+                } else {
+                    this.notifyNokSubscribers();
+                    return false;
+                }
             }
         }
+    }
+    isFigureValidLetter(figure) {
+        const isFigureSingleCharacter = figure.length <= 1; 
+        const isFigureInAlphabet = /[a-ząćęłńóśźż]/i.test(figure)
+        if (isFigureSingleCharacter && isFigureInAlphabet) {
+            return true;
+        }
+    }
+    isAltPressed(figure) {
+        return figure === "ALTGRAPH" ? true : false;
     }
     subscribe(action, handler) {
         if (action === Action.OK) {

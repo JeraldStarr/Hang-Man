@@ -1,5 +1,6 @@
 class Keyboard {
     constructor(validator) {
+        this.validator = validator;
         this.alphabetContainer = this.createAlphabetContainer();
         this.keys = [];
         this.figures = ["A", "Ą", "B", "C", "Ć", "D",
@@ -10,6 +11,7 @@ class Keyboard {
                         "X", "Y", "Z", "Ż", "Ź"];
         this.createKeys();
         this.setOnClickHandler(validator.validateFigure);
+        this.onKeydownHandler(validator.validateFigure);     
     }
     drawKeys() {
         let htmlAlphabet = document.querySelector('#alphabet');
@@ -28,8 +30,24 @@ class Keyboard {
         }
     }
     setOnClickHandler(handler) {
-        this.keys.forEach((key) => {
+        this.keys.forEach(key => {
             key.setOnClickHandler(handler)
         });
+    }
+    onKeydownHandler(handler) {
+        const markKey = e => {
+            const letter = e.key.toUpperCase();
+            const guessed = handler(letter);
+            if (e.keyCode <= 90 && e.keyCode >= 65 || e.keyCode === 225) {
+                this.keys.forEach(item => {
+                    item.onKeydownHandler(e.key.toUpperCase(), guessed);
+                })
+            }
+        }
+        window.addEventListener("keydown", e => {
+            markKey(e);
+        });
+        
+
     }
 }

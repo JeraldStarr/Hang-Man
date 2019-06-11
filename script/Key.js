@@ -10,14 +10,21 @@ class Key {
     }
     setOnClickHandler(handler) {
         const markKey = () => {
-            if (handler(this.figure)) {
-                this.addClass("guessed");
-            } else {
-                this.addClass("notGuessed");
-            }
+            const guessed = handler(this.figure);
+            this.colourKeys(guessed, this.figure);
             this.div.removeEventListener("click", markKey);
         }
         this.div.addEventListener("click", markKey);
+    }
+    onKeydownHandler(letter, guessed) {
+        this.colourKeys(guessed, letter);
+    }
+    colourKeys(guessed, letter) {
+        if (guessed && this.figure === letter) {
+            this.addClass("guessed"); 
+        } else if (!guessed && this.figure === letter) {
+            this.addClass("notGuessed");   
+        }
     }
     createDiv() {
             const divHTML = document.createElement("div");
