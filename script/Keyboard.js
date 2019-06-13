@@ -1,6 +1,5 @@
 class Keyboard {
     constructor(validator) {
-        this.validator = validator;
         this.alphabetContainer = this.createAlphabetContainer();
         this.keys = [];
         this.figures = ["A", "Ą", "B", "C", "Ć", "D",
