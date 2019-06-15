@@ -1,3 +1,7 @@
+:root {
+	--backgroundColor: #000000;
+	--fontColor: lightgray;
+}
 *{
 	margin: 0;
 	padding: 0;
@@ -5,8 +9,8 @@
 }
 
 body {
-	background-color: #000000;
-	color: lightgray;
+	background-color: var(--backgroundColor);
+	color: var(--fontColor);
 	font-family: 'Courier New';
 }
 
@@ -55,7 +59,7 @@ section {
     margin: 0.5vw;
     border: 3px solid gray;
     float: left;
-    border-radius: 0.7vw;
+    border-radius: 4px;
     line-height: 3.5vw;
 
 }
@@ -75,6 +79,7 @@ section {
 
 .reset:hover {
 	color: white;
+	cursor: pointer;
 }
 
 .reset:active {
@@ -96,12 +101,16 @@ section {
 	border: 3px solid #00C000;
 	cursor: default;
 }
+
 @media screen and (orientation: portrait) {
 	section {
 		align-content: center;
 	}
 	#board {
 		margin-bottom: 15vh;
+	}
+	.victory {
+		font-size: 25px;
 	}
 }
 @media screen and (max-width: 768px) {
@@ -122,6 +131,9 @@ section {
 	.reset {
 		font-size: 8vw;
 	}
+	.victory {
+		font-size: 25px;
+	}
 }
 @media screen and (max-height: 968px) {
 	#board {
@@ -140,7 +152,7 @@ section {
 		width: 90%;
 	}
 	#board {
-		font-size: 5vw;
+		font-size: 8vw;
 	}
 	.letter {
 		width: 10vw;
@@ -148,5 +160,9 @@ section {
 		line-height: 10vw;
 		font-size: 7vw;
 		margin: 1vw;
+	}
+	.reset {
+		font-weight: bold;
+		font-size: 11vw;
 	}
 }

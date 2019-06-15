@@ -3,9 +3,9 @@ class Game {
         this.password = new Password();
         this.showFailedMessage = () => {
             const alphabetContainer = document.querySelector("#alphabet");
-            alphabetContainer.innerHTML = `Przegrana! Prawidłowe hasło: 
+            alphabetContainer.innerHTML = `<span class="victory">Przegrana! Prawidłowe hasło: 
             ${this.selectedPassword} <br/><br/><span class="reset" 
-            onclick="location.reload()">JESZCZE RAZ?</span>`;
+            onclick="location.reload()">JESZCZE RAZ?</span></span>`;
         }
         this.hangMan = new HangMan(this.showFailedMessage);
         this.selectedPassword = this.password.selectPassword();

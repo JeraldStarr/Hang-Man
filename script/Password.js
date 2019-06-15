@@ -75,9 +75,9 @@ class Password {
     }
     displayVictoryMessage() {
         const alphabetContainer = document.querySelector('#alphabet');
-            alphabetContainer.innerHTML = `Tak jest! Podano prawidłowe hasło: 
+            alphabetContainer.innerHTML = `<span class="victory">Brawo! Podano prawidłowe hasło: 
             ${this._selectedPassword} <br/><br/><span class="reset" 
-            onclick="location.reload()">JESZCZE RAZ?</span>`;
+            onclick="location.reload()">JESZCZE RAZ?</span></span>`;
     }
     showHtml() {
         this.boardHtml.innerHTML = this.hiddenPassword;
