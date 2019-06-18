@@ -10,20 +10,35 @@ class Key {
     }
     setOnClickHandler(handler) {
         const markKey = () => {
-            const guessed = handler(this.figure);
-            this.colourKeys(guessed, this.figure);
-            this.div.removeEventListener("click", markKey);
+            this.colourKeys(handler(this.figure));
         }
-        this.div.addEventListener("click", markKey);
+        this.div.addEventListener("click", markKey, {once:true});
+        this.setOnKeydownHandler();
     }
-    onKeydownHandler(letter, guessed) {
-        this.colourKeys(guessed, letter);
+    setOnKeydownHandler(handler) {
+        let self = this
+        window.addEventListener("keydown", e => {
+            if (self.isUsedAlphabetLetter(e))
+            {
+                let key = self.translateKeyEventToChar(e);
+                if (key == self.figure)
+                    self.div.dispatchEvent(new Event("click"));
+            }
+        });
     }
-    colourKeys(guessed, letter) {
-        if (guessed && this.figure === letter) {
-            this.addClass("guessed"); 
-        } else if (!guessed && this.figure === letter) {
-            this.addClass("notGuessed");   
+    translateKeyEventToChar(event) {
+        let keyMap = {"A":"Ą", "C":"Ć", "E":"Ę", "L":"Ł", "N":"Ń", "O":"Ó", "S":"Ś", "X":"Ź", "Z":"Ż"}
+        let key = event.key.toUpperCase()
+        return event.altKey ? keyMap[key] : key;
+    }
+    isUsedAlphabetLetter(event) {
+        return event.keyCode <= 90 && event.keyCode >= 65 || event.keyCode === 225
+    }
+    colourKeys(guessed) {
+        if (guessed) {
+            this.addClass("guessed");
+        } else {
+            this.addClass("notGuessed");
         }
     }
     createDiv() {

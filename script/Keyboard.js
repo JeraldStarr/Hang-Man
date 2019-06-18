@@ -8,10 +8,8 @@ class Keyboard {
                         "Ń", "O", "Ó", "P", "Q", "R",
                         "S", "Ś", "T", "U", "V", "W",
                         "X", "Y", "Z", "Ż", "Ź"];
-        this.usedLetters = [];
         this.createKeys();
         this.setOnClickHandler(validator.validateFigure);
-        this.setOnKeydownHandler(validator.validateFigure);     
     }
     drawKeys() {
         let htmlAlphabet = document.querySelector('#alphabet');
@@ -33,28 +31,5 @@ class Keyboard {
         this.keys.forEach(key => {
             key.setOnClickHandler(handler)
         });
-    }
-    setOnKeydownHandler(handler) {
-        window.addEventListener("keydown", e => {
-            const letter = e.key.toUpperCase();
-            if (this.isUsedAlphabetLetter(e)) {
-                if (this.isLetterUsedFirstTime(letter)) {
-                    const guessed = handler(letter);
-                    this.keys.forEach(item => {
-                        item.onKeydownHandler(e.key.toUpperCase(), guessed);
-                    })
-                }
-                this.rememberUsedLetter(letter)
-            }
-        });
-    }
-    isLetterUsedFirstTime(letter) {
-       return !this.usedLetters.includes(letter)
-    }
-    rememberUsedLetter(letter) {
-        this.usedLetters.push(letter);
-    }
-    isUsedAlphabetLetter(event) {
-        return event.keyCode <= 90 && event.keyCode >= 65 || event.keyCode === 225
     }
 }
