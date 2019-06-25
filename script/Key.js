@@ -15,12 +15,12 @@ class Key {
         this.div.addEventListener("click", markKey, {once:true});
         this.setOnKeydownHandler();
     }
-    setOnKeydownHandler(handler) {
-        let self = this
+    setOnKeydownHandler() {
+        const self = this
         window.addEventListener("keydown", e => {
             if (self.isUsedAlphabetLetter(e))
             {
-                let key = self.translateKeyEventToChar(e);
+                const key = self.translateKeyEventToChar(e);
                 if (key == self.figure)
                     self.div.dispatchEvent(new Event("click"));
             }
