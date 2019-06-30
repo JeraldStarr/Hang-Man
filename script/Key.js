@@ -1,33 +1,7 @@
-class ComplexKey {
-    constructor(key, shouldAltBePressed) {
-        this.key = key;
-        this.shouldAltBePressed = shouldAltBePressed;
-    }
-
-    static create(polishLetter) {
-        const polishLetterToLatin = { "Ą": "a", "Ć": "c", "Ę": "e", "Ł": "l", "Ń": "n",
-            "Ó": "r", "Ś": "s", "Ź": "x", "Ż": "z" };
-        let shouldAltBePressed = false;
-        let letter = polishLetter;
-        const latinLetter = polishLetterToLatin[polishLetter]
-        if (typeof latinLetter != "undefined") {
-            shouldAltBePressed = true;
-            letter = latinLetter;
-        }
-
-        return new ComplexKey(letter.toLowerCase(), shouldAltBePressed);
-    }
-
-    isEqual(event) {
-        return event.key == this.key && event.altKey == this.shouldAltBePressed;
-    }
-}
-
 class Key {
     constructor(parentElement, figure) {
         this.parentElement = parentElement;
         this.figure = figure;
-        this.complexKey = ComplexKey.create(figure);
         this.div = this.createDiv();
         this.addDivToParentElement();
     }
@@ -44,7 +18,7 @@ class Key {
     setOnKeydownHandler() {
         const self = this
         window.addEventListener("keydown", e => {
-            if (self.complexKey.isEqual(e))
+            if (e.key.toUpperCase() == this.figure)
                 self.div.dispatchEvent(new Event("click"));
         });
     }
