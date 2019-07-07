@@ -4,7 +4,7 @@ Hangman is a game of guessing passwords. When a user guesses a letter, this lett
 ![Application's logo](doc/docImg/hangman.png)
 
 # Features
-The game is for one user which guessing a draw password. User can choose a letter by clicking a mouse the letter on the keyboard
+The game is for one user which guessing a draw password. User can choose a letter by clicking a mouse or pressing the key on a keyboard.
 
 # Technologies
 JavaScript, CSS, HTML
@@ -13,9 +13,10 @@ JavaScript, CSS, HTML
 Google Chrome - version 73.0.3683.103 and higher  
 Mozilla Firefox - version 66.0.3 and higher  
 Opera - version 58.0.3135.132 and higher  
+Chromium - version 71.0.3578.98 and higher 
 
 # Supported Controllers
-Mouse
+Mouse, Keyboard
 
 # Architecture
 ![Application's logo](doc/docImg/class_diagram.png)
