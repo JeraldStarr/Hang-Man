@@ -16,10 +16,9 @@ class Key {
         this.setOnKeydownHandler();
     }
     setOnKeydownHandler() {
-        const self = this
         window.addEventListener("keydown", e => {
-            if (e.key.toUpperCase() == this.figure)
-                self.div.dispatchEvent(new Event("click"));
+            if (e.key.toUpperCase() === this.figure)
+                this.div.dispatchEvent(new Event("click"));
         });
     }
 
