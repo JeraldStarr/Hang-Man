@@ -28,7 +28,7 @@ class Keyboard {
         }
     }
     setOnClickHandler(handler) {
-        this.keys.forEach((key) => {
+        this.keys.forEach(key => {
             key.setOnClickHandler(handler)
         });
     }
