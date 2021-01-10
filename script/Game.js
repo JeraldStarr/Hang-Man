@@ -7,14 +7,12 @@ class Game {
             alphabetContainer.innerHTML = `<span class="victory">Przegrana! Prawidłowe hasło: 
             ${this.selectedPassword} <br/><br/><span class="reset" 
             onclick="location.reload()">JESZCZE RAZ?</span></span>`;
-            this.lose.play();
+            this.sounds.playEffect(this.sounds.lose);
         }
         this.hangMan = new HangMan(this.informAboutDefeat);
         this.selectedPassword = this.password.selectPassword();
         this.validator = new Validator(this.selectedPassword);
         this.keyboard = new Keyboard(this.validator);
-        this.ok = this.sounds.ok;
-        this.nok = this.sounds.nok;
         this.lose = this.sounds.lose;
         this.subscribe();
         this.draw();
@@ -29,11 +27,11 @@ class Game {
             this.password.showFigure(figure);          
         });
         this.validator.subscribe(Action.OK, () => {          
-            this.ok.play();
+            this.sounds.playEffect(this.sounds.ok);
         });
         this.validator.subscribe(Action.NOK, () => {
             this.hangMan.drawNextImage();
-            this.nok.play();
+            this.sounds.playEffect(this.sounds.nok);
         });
     }
 }

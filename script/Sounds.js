@@ -5,5 +5,7 @@ class Sounds {
         this.lose = new Audio("audio/lose.wav");
         this.win = new Audio("audio/win.wav");
     }
-
+    playEffect(sound) {
+        sound.play();
+    }
 }
