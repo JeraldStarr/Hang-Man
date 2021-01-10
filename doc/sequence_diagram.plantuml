@@ -74,6 +74,7 @@ alt validation OK
     Validator -> Password: showFigure(figure)
     alt password guessed
         Password -> Browser: show(win)
+        Sounds -> Browser: playEffect(win)
     end
     Validator <-- Password
     Key <-- Validator: true
@@ -81,6 +82,7 @@ else validation NOK
     Validator -> HangMan: drawNextImage()
     alt game lost
         HangMan -> Browser: show(failed)
+        Sounds -> Browser: playEffect(lose)
     end
     Validator <-- HangMan
     Key <-- Validator: false

@@ -47,6 +47,9 @@ class Game {
     - draw()
     - subscribe()
 }
+class Sounds {
+    + playEffect(sound)
+}
 enum Action {
     Ok,
     Nok
@@ -58,7 +61,8 @@ Keyboard "1" *-- "many" Cutting
 Game "1" *-- "1" HangMan
 Game "1" *-- "1" Password
 Game "1" *-- "1" Validator
-
+Sounds "1" --* "1" Password
+Sounds "1" --* "1" Game
 
 Keyboard -left-> "1" Validator
 @enduml
