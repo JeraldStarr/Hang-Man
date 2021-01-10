@@ -44,6 +44,8 @@ class Password {
         this._selectedPassword = "";
         this.hiddenPassword = "";
         this.boardHtml = document.querySelector('#board');
+        this.sounds = new Sounds();
+        this.win = this.sounds.win;
     }
     selectPassword() {
         this._selectedPassword = this.statements[Math.floor(Math.random() * this.statements.length)].toUpperCase();
@@ -70,14 +72,15 @@ class Password {
         }
         this.showHtml();
         if(this.isPasswordGuessed()) {
-            this.displayVictoryMessage();
+            this.informAboutVictory();
         }
     }
-    displayVictoryMessage() {
+    informAboutVictory() {
         const alphabetContainer = document.querySelector('#alphabet');
             alphabetContainer.innerHTML = `<span class="victory">Brawo! Podano prawidłowe hasło: 
             ${this._selectedPassword} <br/><br/><span class="reset" 
             onclick="location.reload()">JESZCZE RAZ?</span></span>`;
+            this.win.play();
     }
     showHtml() {
         this.boardHtml.innerHTML = this.hiddenPassword;

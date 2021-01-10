@@ -1,12 +1,12 @@
 class HangMan {
-    constructor(showFailedMessage) {
+    constructor(informAboutDefeat) {
         this._fails = -1;
         this._hangManImage = document.querySelector("#gibbet img");
-        this._showFailedMessage = showFailedMessage;
+        this._informAboutDefeat = informAboutDefeat;
         this._failed = () => {
             const NUMBER_OF_FAILS = 9;
             if (this._fails >= NUMBER_OF_FAILS) {
-                this._showFailedMessage();
+                this._informAboutDefeat();
             }
         }
     }

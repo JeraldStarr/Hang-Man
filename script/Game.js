@@ -1,18 +1,21 @@
 class Game {
     constructor() {
         this.password = new Password();
-        this.showFailedMessage = () => {
+        this.sounds = new Sounds();
+        this.informAboutDefeat = () => {
             const alphabetContainer = document.querySelector("#alphabet");
             alphabetContainer.innerHTML = `<span class="victory">Przegrana! Prawidłowe hasło: 
             ${this.selectedPassword} <br/><br/><span class="reset" 
             onclick="location.reload()">JESZCZE RAZ?</span></span>`;
+            this.lose.play();
         }
-        this.hangMan = new HangMan(this.showFailedMessage);
+        this.hangMan = new HangMan(this.informAboutDefeat);
         this.selectedPassword = this.password.selectPassword();
         this.validator = new Validator(this.selectedPassword);
         this.keyboard = new Keyboard(this.validator);
-        this.ok = new Audio("audio/ok.wav");
-        this.nok = new Audio("audio/nok.wav");
+        this.ok = this.sounds.ok;
+        this.nok = this.sounds.nok;
+        this.lose = this.sounds.lose;
         this.subscribe();
         this.draw();
     }

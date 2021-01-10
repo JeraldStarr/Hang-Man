@@ -1,4 +1,4 @@
 const Action = {
-    OK: "ok",
-    NOK: 'nok'
+    OK: 'ok',
+    NOK: 'nok',
 }
